@@ -17,23 +17,21 @@ export default {
 
         if (path === '/ai') {
             console.log('trackInfo ai request')
-            let answer
-            try {
-                answer = await env.AI.run('@cf/meta/llama-3-8b-instruct', {
-                    prompt: "What is the origin of the phrase 'Hello, World'"
-                });
-            } catch (e) {
-                return new Response(e.message)
-            }
+            const res = await fetch(
+                "https://github.com/Azure-Samples/cognitive-services-speech-sdk/raw/master/samples/cpp/windows/console/samples/enrollment_audio_katie.wav"
+            );
+            const blob = await res.arrayBuffer();
 
-            return new Response(JSON.stringify(answer), {
-                headers: {
-                    ...corsHeaders,
-                    "Access-Control-Allow-Headers": request.headers.get(
-                        "Access-Control-Request-Headers"
-                    ),
-                }
-            });
+            const input = {
+                audio: [...new Uint8Array(blob)],
+            };
+
+            const response = await env.AI.run(
+                "@cf/openai/whisper",
+                input
+            );
+
+            return Response.json({ input: { audio: [] }, response });
         }
 
         let id = env.TRACK_INFO.idFromName('TRACK_INFO')

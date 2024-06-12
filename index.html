@@ -13,7 +13,7 @@
   </head>
 
   <body>
-    
+
     <div class="grid">
       <h1><a href="https://github.com/dcd2139/commcon2024" title="CommCon Podcast demo">CommCon2024 Podcast Demo Code</a>
       </h1>
@@ -21,6 +21,7 @@
         <h2>Local stream</h2>
         <video id="local" autoplay muted playsinline></video>
         <button type="button" onclick="onPublish()">Publish</button>
+        <button type="button" onclick="recordAudio()">Record</button>
       </div>
       <div>
         <h2>Remote echo stream</h2>
@@ -65,7 +66,7 @@
       const localSession = await createCallsSession();
 
       async function onPublish() {
-        
+
       // Next we need to push our audio and video tracks. We will add them to the peer
       // connection using the addTransceiver API which allows us to specify the direction
       const transceivers = media.getTracks().map((track) =>
@@ -317,9 +318,60 @@
         .then((result) => console.log(result))
         .catch((error) => console.error(error));
       }
+
+      window.recordAudio = () => {
+        startAudioRecording(localVideo)
+      }
+
+      async function startAudioRecording(videoElement) {
+        const stream = videoElement.captureStream();
+        const audioTracks = stream.getAudioTracks();
+
+        if (audioTracks.length === 0) {
+          console.error('No audio tracks available in the video element');
+          return;
+        }
+
+        const mediaRecorder = new MediaRecorder(stream);
+        const audioChunks = [];
+
+        mediaRecorder.ondataavailable = (event) => {
+          if (event.data.size > 0) {
+            audioChunks.push(event.data);
+          }
+        };
+
+        mediaRecorder.onstop = async () => {
+          const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+          const audioUrl = URL.createObjectURL(audioBlob);
+          const a = document.createElement('a');
+          a.style.display = 'none';
+          a.href = audioUrl;
+          a.download = 'recorded-audio.webm';
+          document.body.appendChild(a);
+          a.click();
+          window.URL.revokeObjectURL(audioUrl);
+        };
+
+        mediaRecorder.start();
+
+        const loopRecording = () => {
+          setTimeout(() => {
+            if (mediaRecorder.state === 'recording') {
+              mediaRecorder.stop();
+              mediaRecorder.start();
+              loopRecording();
+            }
+          }, 5000);
+        };
+
+        loopRecording();
+
+        return mediaRecorder;
+      }
     </script>
 
-    
+
 
     <style>
       /* Styles are safe to ignore, just here for demo */
