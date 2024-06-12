@@ -9,3 +9,6 @@ class_name = 'TrackInfo'
 [[migrations]]
 tag = "v1" # Should be unique for each entry
 new_classes = ["TrackInfo"]
+
+[ai]
+binding = "AI"
