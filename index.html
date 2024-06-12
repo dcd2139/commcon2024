@@ -63,7 +63,6 @@
       // RTCPeerConnection and a Calls session, and connect the two.
       const localSession = await createCallsSession();
 
-
       async function onPublish() {
 
       // Next we need to push our audio and video tracks. We will add them to the peer
@@ -109,6 +108,8 @@
       );
 
       }
+
+      window.onPublish = onPublish();
 
      async function onSubscribe() {
 
@@ -205,6 +206,8 @@
       pulledTracks.forEach((t) => remoteVideoStream.addTrack(t));
 
     }
+
+    window.onSubscribe = onSubscribe();
 
       // ===============================================================
       // THE END — below is the createCallsSession function used above.
