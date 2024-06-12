@@ -116,7 +116,7 @@
                 tracks : transceivers.map(({ sender }) => ({
                 location: "remote",
                 trackName: sender.track?.id,
-                sessionId: localSessionId
+                sessionId: localSession.sessionId
                 }))
             }),
           },
