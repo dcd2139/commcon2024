@@ -27,7 +27,8 @@
       </div>
     </div>
 
-    <script type="module">
+    <script>
+      (async () => {
       // WORKER URL: https://commcon2024.email1233634563465346.workers.dev/
 
       // This is the App ID from the dashboard that identifies this Calls Application.
@@ -293,6 +294,7 @@
         .then((result) => console.log(result))
         .catch((error) => console.error(error));
       }
+      })()
     </script>
     <style>
       /* Styles are safe to ignore, just here for demo */
