@@ -28,6 +28,12 @@
     </div>
 
     <script type="module">
+
+      
+          
+       
+
+       
       // This is the App ID from the dashboard that identifies this Calls Application.
       // https://dash.cloudflare.com/?to=/:account/calls
       // Note: Calls sessions are limited to interacting with sessions in the same App ID.
@@ -59,6 +65,9 @@
       // which is defined towards the bottom of this script. This will create an
       // RTCPeerConnection and a Calls session, and connect the two.
       const localSession = await createCallsSession();
+
+
+      function onPublish() {
 
       // Next we need to push our audio and video tracks. We will add them to the peer
       // connection using the addTransceiver API which allows us to specify the direction
@@ -101,6 +110,10 @@
       await localSession.peerConnection.setRemoteDescription(
         new RTCSessionDescription(pushTracksResponse.sessionDescription),
       );
+
+      }
+
+      function onSubscribe() {
 
       // 🌀🌀🌀
       // At this point, we're done with the sending "local" side, and
@@ -193,6 +206,8 @@
       const remoteVideoStream = new MediaStream();
       remoteVideo.srcObject = remoteVideoStream;
       pulledTracks.forEach((t) => remoteVideoStream.addTrack(t));
+
+    }
 
       // ===============================================================
       // THE END — below is the createCallsSession function used above.
