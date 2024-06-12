@@ -1,21 +1,8 @@
-ty<!doctype html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <!--meta charset="utf-8">
-    <meta name="description" content="WebRTC code samples">
-    <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1, maximum-scale=1">
-    <meta itemprop="name" content="WebRTC code samples">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta id="theme-color" name="theme-color" content="#ffffff">
-
-    <base target="_blank">
-
-    <title>CommCon2024 Podcast</title>
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" type="text/css">
-
+  <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- This adapter normalizes cross-browser differences in WebRTC APIs. Currently necessary in order to support Firefox. -->
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/8.1.2/adapter.min.js"
@@ -23,23 +10,10 @@ ty<!doctype html>
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-</head>
-  
-<body>
-    <!--div id="container">
+  </head>
 
-    <audio id="audio-local" controls autoplay></audio>
-      
-    <div>
-        <span id="errorMsg"></span>
-    </div>
-    
-    <a href="https://github.com/dcd2139/commcon2024"
-       title="View source for this page on GitHub" id="viewSource">View source on GitHub</a>
-
-</div-->
-
-<div class="grid">
+  <body>
+    <div class="grid">
       <h1>Calls Echo Demo</h1>
       <div>
         <h2>Local stream</h2>
@@ -51,95 +25,13 @@ ty<!doctype html>
       </div>
     </div>
 
-<style type="module">
-      /* Styles are safe to ignore, just here for demo */
-
-      html {
-        color-scheme: light dark;
-        font-family:
-          system-ui,
-          -apple-system,
-          BlinkMacSystemFont,
-          "Segoe UI",
-          Roboto,
-          Oxygen,
-          Ubuntu,
-          Cantarell,
-          "Open Sans",
-          "Helvetica Neue",
-          sans-serif;
-        background: white;
-        color: black;
-      }
-      body,
-      h1,
-      h2 {
-        margin: 0;
-      }
-      h1,
-      h2 {
-        font-weight: 400;
-      }
-      h1 {
-        font-size: 1.5rem;
-        grid-column: 1 / -1;
-      }
-      h2 {
-        font-size: 1rem;
-        margin-bottom: 0.5rem;
-      }
-      video {
-        width: 100%;
-      }
-      .grid {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-        gap: 1rem;
-      }
-
-      @media (max-width: 500px) {
-        .grid {
-          grid-template-columns: minmax(0, 1fr);
-        }
-      }
-</style>
-</body>
-  
-<script>
-
-/*    
-const audio = document.querySelector('audio');
-
-const constraints = window.constraints = {
-  audio: true,
-  video: false
-};
-
-function handleSuccess(stream) {
-  const audioTracks = stream.getAudioTracks();
-  console.log('Got stream with constraints:', constraints);
-  console.log('Using audio device: ' + audioTracks[0].label);
-  stream.oninactive = function() {
-    console.log('Stream ended');
-  };
-  window.stream = stream; // make variable available to browser console
-  audio.srcObject = stream;
-}
-
-function handleError(error) {
-  const errorMessage = 'navigator.MediaDevices.getUserMedia error: ' + error.message + ' ' + error.name;
-  document.getElementById('errorMsg').innerText = errorMessage;
-  console.log(errorMessage);
-}
-
-navigator.mediaDevices.getUserMedia(constraints).then(handleSuccess).catch(handleError);*/
-
- // This is the App ID from the dashboard that identifies this Calls Application.
+    <script type="module">
+      // This is the App ID from the dashboard that identifies this Calls Application.
       // https://dash.cloudflare.com/?to=/:account/calls
       // Note: Calls sessions are limited to interacting with sessions in the same App ID.
-      const APP_ID = "9aa2e71582245ce1fd7f9a4c1ec39480";
+      const APP_ID = "$APP_ID";
       // ❗❗❗ DO NOT USE YOUR TOKEN IN THE BROWSER FOR PRODUCTION. It should be kept and used server-side.
-      const APP_TOKEN = "ad7a9cda73faaaf66ac43775381c55911af060c329ae237def697d9f2c27d530";
+      const APP_TOKEN = "$APP_TOKEN";
       // We'll use this for authentication when making requests to the Calls API.
       const headers = {
         Authorization: `Bearer ${APP_TOKEN}`,
@@ -220,8 +112,6 @@ navigator.mediaDevices.getUserMedia(constraints).then(handleSuccess).catch(handl
         trackName: sender.track?.id,
         sessionId: localSessionId,
       }));
-
-      console.log(JSON.stringify(tracksToPull));
 
       // Let's create the remoteSession now to pull the tracks
       const remoteSession = await createCallsSession();
@@ -368,7 +258,59 @@ navigator.mediaDevices.getUserMedia(constraints).then(handleSuccess).catch(handl
           peerConnection,
           sessionId,
         };
-      }    
-  
-</script>
+      }
+    </script>
+    <style>
+      /* Styles are safe to ignore, just here for demo */
+
+      html {
+        color-scheme: light dark;
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          Roboto,
+          Oxygen,
+          Ubuntu,
+          Cantarell,
+          "Open Sans",
+          "Helvetica Neue",
+          sans-serif;
+        background: white;
+        color: black;
+      }
+      body,
+      h1,
+      h2 {
+        margin: 0;
+      }
+      h1,
+      h2 {
+        font-weight: 400;
+      }
+      h1 {
+        font-size: 1.5rem;
+        grid-column: 1 / -1;
+      }
+      h2 {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+      }
+      video {
+        width: 100%;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 1rem;
+      }
+
+      @media (max-width: 500px) {
+        .grid {
+          grid-template-columns: minmax(0, 1fr);
+        }
+      }
+    </style>
+  </body>
 </html>
