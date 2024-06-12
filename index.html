@@ -64,7 +64,7 @@
       const localSession = await createCallsSession();
 
       async function onPublish() {
-
+        
       // Next we need to push our audio and video tracks. We will add them to the peer
       // connection using the addTransceiver API which allows us to specify the direction
       const transceivers = media.getTracks().map((track) =>
@@ -120,11 +120,11 @@
                 }))
             }),
           },
-        ).then((res) => res.json());
+        );
 
       }
 
-      window.onPublish = onPublish;
+    window.onPublish = onPublish;
 
      async function onSubscribe() {
 
@@ -143,7 +143,7 @@
          },
        ).then((res) => res.json());
 
-      const tracksToPull = pullTracksToSubscribeResponse.body.tracks;
+      const tracksToPull = pullTracksToSubscribeResponse.tracks;
 
       // Let's create the remoteSession now to pull the tracks
       const remoteSession = await createCallsSession();
