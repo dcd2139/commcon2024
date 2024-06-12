@@ -107,6 +107,21 @@
         new RTCSessionDescription(pushTracksResponse.sessionDescription),
       );
 
+      const pushTracksToSubscribersResponse = await fetch(
+          `https://commcon2024.email1233634563465346.workers.dev/`,
+          {
+            method: "POST",
+            headers,
+            body: JSON.stringify({
+                tracks : transceivers.map(({ sender }) => ({
+                location: "remote",
+                trackName: sender.track?.id,
+                sessionId: localSessionId,
+              )),
+            }),
+          },
+        ).then((res) => res.json());
+
       }
 
       window.onPublish = onPublish;
@@ -120,11 +135,15 @@
       // session id and track information to pull via some signalling
       // method such as WebSockets.
       const localSessionId = localSession.sessionId;
-      const tracksToPull = transceivers.map(({ sender }) => ({
-        location: "remote",
-        trackName: sender.track?.id,
-        sessionId: localSessionId,
-      }));
+      const pullTracksToSubscribeResponse = await fetch(
+         `https://commcon2024.email1233634563465346.workers.dev/`,
+         {
+           method: "GET",
+           headers
+         },
+       ).then((res) => res.json());
+
+      const tracksToPull = pullTracksToSubscribeResponse.body.tracks;
 
       // Let's create the remoteSession now to pull the tracks
       const remoteSession = await createCallsSession();
