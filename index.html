@@ -14,9 +14,21 @@
 
   <body>
     
+    <div class="grid">
+      <h1>Calls Echo Demo</h1>
+      <div>
+        <h2>Local stream</h2>
+        <video id="local" autoplay muted playsinline></video>
+        <button type="button" onclick="onPublish()">Publish</button>
+      </div>
+      <div>
+        <h2>Remote echo stream</h2>
+        <video id="remote" autoplay muted playsinline></video>
+        <button type="button" onclick="onSubscribe()">Subscribe</button>
+      </div>
+    </div>
 
-    <script>
-      (async () => {
+    <script type="module">
       // WORKER URL: https://commcon2024.email1233634563465346.workers.dev/
 
       // This is the App ID from the dashboard that identifies this Calls Application.
@@ -282,23 +294,10 @@
         .then((result) => console.log(result))
         .catch((error) => console.error(error));
       }
-      })()
     </script>
 
-    <div class="grid">
-      <h1>Calls Echo Demo</h1>
-      <div>
-        <h2>Local stream</h2>
-        <video id="local" autoplay muted playsinline></video>
-        <button type="button" onclick="onPublish">Publish</button>
-      </div>
-      <div>
-        <h2>Remote echo stream</h2>
-        <video id="remote" autoplay muted playsinline></video>
-        <button type="button" onclick="onSubscribe">Subscribe</button>
-      </div>
-    </div>
     
+
     <style>
       /* Styles are safe to ignore, just here for demo */
 
