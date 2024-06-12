@@ -29,10 +29,6 @@
 
     <script type="module">
 
-      
-          
-       
-
        
       // This is the App ID from the dashboard that identifies this Calls Application.
       // https://dash.cloudflare.com/?to=/:account/calls
@@ -67,7 +63,7 @@
       const localSession = await createCallsSession();
 
 
-      function onPublish() {
+      async function onPublish() {
 
       // Next we need to push our audio and video tracks. We will add them to the peer
       // connection using the addTransceiver API which allows us to specify the direction
@@ -113,7 +109,7 @@
 
       }
 
-      function onSubscribe() {
+     async function onSubscribe() {
 
       // 🌀🌀🌀
       // At this point, we're done with the sending "local" side, and
