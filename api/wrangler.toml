@@ -1,0 +1,11 @@
+name = "commcon2024"
+main = "index.js"
+compatibility_date = "2024-06-12"
+
+[[durable_objects.bindings]]
+name = "TRACK_INFO"
+class_name = 'TrackInfo'
+
+[[migrations]]
+tag = "v1" # Should be unique for each entry
+new_classes = ["TrackInfo"]

@@ -28,8 +28,8 @@
     </div>
 
     <script type="module">
+      // WORKER URL: https://commcon2024.email1233634563465346.workers.dev/
 
-       
       // This is the App ID from the dashboard that identifies this Calls Application.
       // https://dash.cloudflare.com/?to=/:account/calls
       // Note: Calls sessions are limited to interacting with sessions in the same App ID.
@@ -271,6 +271,27 @@
           peerConnection,
           sessionId,
         };
+      }
+
+      function postTrackInfo() {
+        const myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        const raw = JSON.stringify({
+          "test": 1
+        });
+
+        const requestOptions = {
+          method: "POST",
+          headers: myHeaders,
+          body: raw,
+          redirect: "follow"
+        };
+
+        fetch("https://commcon2024.email1233634563465346.workers.dev/", requestOptions)
+        .then((response) => response.text())
+        .then((result) => console.log(result))
+        .catch((error) => console.error(error));
       }
     </script>
     <style>
