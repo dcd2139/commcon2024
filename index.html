@@ -13,19 +13,7 @@
   </head>
 
   <body>
-    <div class="grid">
-      <h1>Calls Echo Demo</h1>
-      <div>
-        <h2>Local stream</h2>
-        <video id="local" autoplay muted playsinline></video>
-        <button type="button" onclick="onPublish">Publish</button>
-      </div>
-      <div>
-        <h2>Remote echo stream</h2>
-        <video id="remote" autoplay muted playsinline></video>
-        <button type="button" onclick="onSubscribe">Subscribe</button>
-      </div>
-    </div>
+    
 
     <script>
       (async () => {
@@ -296,6 +284,21 @@
       }
       })()
     </script>
+
+    <div class="grid">
+      <h1>Calls Echo Demo</h1>
+      <div>
+        <h2>Local stream</h2>
+        <video id="local" autoplay muted playsinline></video>
+        <button type="button" onclick="onPublish">Publish</button>
+      </div>
+      <div>
+        <h2>Remote echo stream</h2>
+        <video id="remote" autoplay muted playsinline></video>
+        <button type="button" onclick="onSubscribe">Subscribe</button>
+      </div>
+    </div>
+    
     <style>
       /* Styles are safe to ignore, just here for demo */
 
